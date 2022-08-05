@@ -1,0 +1,64 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <AssemblyName>XF.Material</AssemblyName>
+    <RootNamespace>XF.Material</RootNamespace>
+    <PackageId>XF.Material</PackageId>
+    <Description>A Xamarin.Forms library for Xamarin.Android and Xamarin.iOS to implement Google's Material Design.</Description>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+    <Version>1.8.1-ip</Version>
+    <AssemblyVersion>1.8.1</AssemblyVersion>
+    <FileVersion>1.8.1-ip</FileVersion>
+    <TargetFrameworks>netstandard2.0;monoandroid10.0;</TargetFrameworks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Platforms\**\*.cs" />
+    <None Include="Platforms\**\*.cs" />
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <None Remove="Platforms\Netstandard\**\*.cs" />
+    <Compile Include="Platforms\Netstandard\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+    <None Remove="Platforms\Shared\**\*.cs" />
+    <Compile Include="Platforms\Shared\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
+    <None Remove="Platforms\Android\**\*.cs" />
+    <None Remove="Platforms\Xamarin\**\*.cs" />
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
+    <AndroidResource Include="Resources\raw\*.json" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="AsyncFixer" Version="1.6.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="IDisposableAnalyzers" Version="4.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Roslynator.Analyzers" Version="4.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
+</Project>
