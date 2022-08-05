@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Android.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -19,6 +16,7 @@ namespace XF.Material.Droid.Renderers
         private MultiPage<Page> _multiPageParent;
         private Toolbar _toolbar;
         private Page _childPage;
+        private Queue<Page> awaitedPushPages = new Queue<Page>();
 
         public MaterialNavigationPageRenderer(Context context) : base(context) { }
 
@@ -35,6 +33,12 @@ namespace XF.Material.Droid.Renderers
                 HandleParent(_navigationPage.Parent);
 
                 HandleChildPage(_navigationPage.CurrentPage);
+
+                while (this.awaitedPushPages.Count != 0)
+                {
+                    var page = this.awaitedPushPages.Dequeue();
+                    this.OnPushAsync(page, false);
+                }
             }
 
             if (e?.OldElement != null)
@@ -175,6 +179,12 @@ namespace XF.Material.Droid.Renderers
 
         protected override Task<bool> OnPushAsync(Page page, bool animated)
         {
+            if (_navigationPage == null)
+            {
+                this.awaitedPushPages.Enqueue(page);
+                return Task.FromResult(false);
+            }
+
             _navigationPage.InternalPagePush(page);
 
             ChangeElevation(page);
