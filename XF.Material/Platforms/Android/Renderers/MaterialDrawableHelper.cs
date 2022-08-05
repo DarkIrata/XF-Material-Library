@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -308,19 +306,19 @@ namespace XF.Material.Droid.Renderers
             var objAnimElevationPressed = ObjectAnimator.OfFloat(_aView, "elevation", MaterialHelper.ConvertDpToPx(_button.Elevation.RestingElevation))
                 .SetDuration(0);
 
-            var b = new AnimatorSet();
-            b.PlayTogether(objAnimTransZEnabled, objAnimElevationEnabled);
-            b.SetTarget(_aView);
+            var enabledAnimSet = new AnimatorSet();
+            enabledAnimSet.PlayTogether(objAnimTransZEnabled, objAnimElevationEnabled);
+            enabledAnimSet.SetTarget(_aView);
 
-            var bb = new AnimatorSet();
-            bb.PlayTogether(objAnimTransZPressed, objAnimElevationPressed);
-            bb.SetTarget(_aView);
+            var pressedAnimSet = new AnimatorSet();
+            pressedAnimSet.PlayTogether(objAnimTransZPressed, objAnimElevationPressed);
+            pressedAnimSet.SetTarget(_aView);
 
 
-            stateListAnimator.AddState(new[] { R.Attribute.StatePressed }, bb);
-            stateListAnimator.AddState(new[] { R.Attribute.StateFocused, R.Attribute.StateEnabled }, bb);
-            stateListAnimator.AddState(new[] { R.Attribute.StateEnabled }, b);
-            stateListAnimator.AddState(new[] { R.Attribute.StateFocused }, bb);
+            stateListAnimator.AddState(new[] { R.Attribute.StatePressed }, pressedAnimSet);
+            stateListAnimator.AddState(new[] { R.Attribute.StateFocused, R.Attribute.StateEnabled }, pressedAnimSet);
+            stateListAnimator.AddState(new[] { R.Attribute.StateEnabled }, enabledAnimSet);
+            stateListAnimator.AddState(new[] { R.Attribute.StateFocused }, pressedAnimSet);
 
             if (!(_aView is AppCompatImageButton))
             {
