@@ -855,11 +855,13 @@ namespace XF.Material.Forms.UI
         private void ChangeToNormalState()
         {
             const double opactiy = 1;
-            IsEnabled = true;
-            entry.Opacity = opactiy;
-            placeholder.Opacity = opactiy;
-            helper.Opacity = opactiy;
-            underline.Opacity = opactiy;
+            if (IsEnabled)
+            {
+                entry.Opacity = opactiy;
+                placeholder.Opacity = opactiy;
+                helper.Opacity = opactiy;
+                underline.Opacity = opactiy;
+            }
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -1088,6 +1090,12 @@ namespace XF.Material.Forms.UI
 
         private void OnEnabledChanged(bool isEnabled)
         {
+            if (!isEnabled)
+            {
+                this.Unfocus();
+                OnPropertyChanged(nameof(this.IsFocused));
+            }
+
             Opacity = isEnabled ? 1 : 0.33;
             helper.IsVisible = isEnabled && !string.IsNullOrEmpty(HelperText);
         }
