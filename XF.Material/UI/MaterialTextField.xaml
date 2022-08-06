@@ -73,7 +73,7 @@
                 HorizontalOptions="FillAndExpand"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
-                TextColor="#D0000000"
+                TextColor="{Binding TextColor, Source={x:Reference ThisControl}}"
                 VerticalOptions="FillAndExpand" />
             <ContentView.Triggers>
                 <DataTrigger
@@ -119,7 +119,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Margin="12,4,12,0"
-            TextColor="#99000000"
+            TextColor="{Binding HelperTextColor, Source={x:Reference ThisControl}}"
             TypeScale="Caption">
             <Label.Triggers>
                 <Trigger TargetType="Label" Property="Text" Value="">
@@ -142,7 +142,7 @@
             Grid.Column="2"
             Margin="0,4,12,0"
             HorizontalOptions="End"
-            TextColor="#99000000"
+            TextColor="{Binding HelperTextColor, Source={x:Reference ThisControl}}"
             TypeScale="Caption">
             <Label.Triggers>
                 <Trigger TargetType="Label" Property="Text" Value="">
