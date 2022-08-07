@@ -32,6 +32,7 @@
             Grid.ColumnSpan="3"
             BackgroundColor="{Binding CardBackgroundColor, Source={x:Reference ThisControl}}"
             CornerRadius="4,4,0,0" />
+        
         <material:MaterialIcon
             x:Name="leadingIcon"
             Grid.Row="0"
@@ -46,6 +47,22 @@
                 </Trigger>
             </View.Triggers>
         </material:MaterialIcon>
+
+        <material:MaterialIcon
+            x:Name="trailingIcon"
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="0,16,12,16"
+            HeightRequest="24"
+            VerticalOptions="Start"
+            WidthRequest="24">
+            <View.Triggers>
+                <Trigger TargetType="material:MaterialIcon" Property="Source" Value="{x:Null}">
+                    <Setter Property="IsVisible" Value="False" />
+                </Trigger>
+            </View.Triggers>
+        </material:MaterialIcon>
+        
         <material:MaterialLabel
             x:Name="placeholder"
             Grid.Row="0"
@@ -103,16 +120,7 @@
             HorizontalOptions="Center"
             VerticalOptions="End"
             WidthRequest="0" />
-        <material:MaterialIcon
-            x:Name="trailingIcon"
-            Grid.Row="0"
-            Grid.Column="2"
-            Margin="0,16,12,16"
-            HeightRequest="24"
-            IsVisible="False"
-            Source="xf_arrow_dropdown"
-            VerticalOptions="Start"
-            WidthRequest="24" />
+        
         <material:MaterialLabel
             x:Name="helper"
             Grid.Row="1"

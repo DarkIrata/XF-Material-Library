@@ -99,6 +99,12 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty LeadingIconTintColorProperty = BindableProperty.Create(nameof(LeadingIconTintColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#99000000"));
 
+        public static readonly BindableProperty TrailingIconTapGestureRecognizerProperty = BindableProperty.Create(nameof(TrailingIconTapGestureRecognizer), typeof(TapGestureRecognizer), typeof(MaterialTextField));
+
+        public static readonly BindableProperty TrailingIconProperty = BindableProperty.Create(nameof(TrailingIcon), typeof(ImageSource), typeof(MaterialTextField));
+
+        public static readonly BindableProperty TrailingIconTintColorProperty = BindableProperty.Create(nameof(TrailingIconTintColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#99000000"));
+
         public static readonly BindableProperty ErrorIconProperty = BindableProperty.Create(nameof(ErrorIcon), typeof(string), typeof(MaterialTextField), "xf_error");
 
         public static readonly BindableProperty MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(MaterialTextField), 0);
@@ -395,6 +401,33 @@ namespace XF.Material.Forms.UI
         {
             get => (Color)GetValue(LeadingIconTintColorProperty);
             set => SetValue(LeadingIconTintColorProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the TapGestureRecognizer of the icon to be showed at the right side of this text field.
+        /// </summary>
+        public TapGestureRecognizer TrailingIconTapGestureRecognizer
+        {
+            get => (TapGestureRecognizer)GetValue(TrailingIconTapGestureRecognizerProperty);
+            set => SetValue(TrailingIconTapGestureRecognizerProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the image source of the icon to be showed at the right side of this text field.
+        /// </summary>
+        public ImageSource TrailingIcon
+        {
+            get => (ImageSource)GetValue(TrailingIconProperty);
+            set => SetValue(TrailingIconProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the tint color of the icon of this text field.
+        /// </summary>
+        public Color TrailingIconTintColor
+        {
+            get => (Color)GetValue(TrailingIconTintColorProperty);
+            set => SetValue(TrailingIconTintColorProperty, value);
         }
 
         /// <summary>
@@ -760,7 +793,7 @@ namespace XF.Material.Forms.UI
             }
 
             if (isStart && startObject != null)
-                SetTrailingIcon();
+                SetTrailingIconByInputType();
 
             if (startObject != null && !string.IsNullOrEmpty(Text))
             {
@@ -865,7 +898,7 @@ namespace XF.Material.Forms.UI
 
             Device.BeginInvokeOnMainThread(async () =>
             {
-                SetTrailingIcon();
+                SetTrailingIconByInputType();
 
                 var accentColor = TintColor;
                 placeholder.TextColor = accentColor;
@@ -889,7 +922,7 @@ namespace XF.Material.Forms.UI
             });
         }
 
-        private void SetTrailingIcon()
+        private void SetTrailingIconByInputType()
         {
             if (InputType == MaterialTextFieldInputType.Choice || InputType == MaterialTextFieldInputType.SingleImmediateChoice)
             {
@@ -900,10 +933,6 @@ namespace XF.Material.Forms.UI
             {
                 trailingIcon.Source = "xf_arrow_right";
                 trailingIcon.TintColor = TextColor;
-            }
-            else
-            {
-                trailingIcon.IsVisible = false;
             }
         }
 
@@ -1244,7 +1273,6 @@ namespace XF.Material.Forms.UI
             // entry.AutoSize = inputType == MaterialTextFieldInputType.MultiLine ? EditorAutoSizeOption.TextChanges : EditorAutoSizeOption.Disabled;
             var isChoice = InputType == MaterialTextFieldInputType.Choice || InputType == MaterialTextFieldInputType.SingleImmediateChoice || InputType == MaterialTextFieldInputType.CommandChoice;
             _gridContainer.InputTransparent = isChoice;
-            trailingIcon.IsVisible = isChoice;
 
             entry.IsNumericKeyboard = InputType == MaterialTextFieldInputType.Telephone || InputType == MaterialTextFieldInputType.Numeric;
             entry.IsPassword = InputType == MaterialTextFieldInputType.Password || InputType == MaterialTextFieldInputType.NumericPassword;
@@ -1259,6 +1287,23 @@ namespace XF.Material.Forms.UI
         private void OnLeadingIconTintColorChanged(Color tintColor)
         {
             leadingIcon.TintColor = tintColor;
+        }
+
+        private void OnTrailingIconTapGestureRecognizerChanged(TapGestureRecognizer tapGestureRecognizer)
+        {
+            trailingIcon.GestureRecognizers.Clear();
+            trailingIcon.GestureRecognizers.Add(tapGestureRecognizer);
+        }
+
+        private void OnTrailingIconChanged(ImageSource imageSource)
+        {
+            trailingIcon.Source = imageSource;
+            OnTrailingIconTintColorChanged(TrailingIconTintColor);
+        }
+
+        private void OnTrailingIconTintColorChanged(Color tintColor)
+        {
+            trailingIcon.TintColor = tintColor;
         }
 
         private void OnMaxLengthChanged(int maxLength, bool isMaxLengthCounterVisible)
@@ -1442,6 +1487,9 @@ namespace XF.Material.Forms.UI
                 { nameof(Choices), () => OnChoicesChanged(Choices) },
                 { nameof(LeadingIcon), () => OnLeadingIconChanged(LeadingIcon) },
                 { nameof(LeadingIconTintColor), () => OnLeadingIconTintColorChanged(LeadingIconTintColor) },
+                { nameof(TrailingIconTapGestureRecognizer), () => OnTrailingIconTapGestureRecognizerChanged(TrailingIconTapGestureRecognizer) },
+                { nameof(TrailingIcon), () => OnTrailingIconChanged(TrailingIcon) },
+                { nameof(TrailingIconTintColor), () => OnTrailingIconTintColorChanged(TrailingIconTintColor) },
                 { nameof(InputType), () => OnInputTypeChanged() },
                 { nameof(IsSpellCheckEnabled), () => OnInputTypeChanged() },
                 { nameof(IsTextPredictionEnabled), () => OnInputTypeChanged() },
