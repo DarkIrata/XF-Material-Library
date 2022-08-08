@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\lock.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\lock.svg" />
     <EmbeddedResource Include="Images\slideshow-black-18dp.svg" />
   </ItemGroup>
 
