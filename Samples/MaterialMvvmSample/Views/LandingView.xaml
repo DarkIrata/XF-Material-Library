@@ -36,7 +36,9 @@
                  <material:MaterialButton Text="MaterialPicker sample"
                                          Command="{Binding GoToMaterialPickerViewCommand}"/>
 
-              <!-- New sample shortcuts should be added here (Button + Associated command in the LandingViewModel) -->
+                <material:MaterialButton Text="MaterialSwitch sample"
+                                         Command="{Binding GoToMaterialSwitchViewCommand}"/>
+                <!-- New sample shortcuts should be added here (Button + Associated command in the LandingViewModel) -->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

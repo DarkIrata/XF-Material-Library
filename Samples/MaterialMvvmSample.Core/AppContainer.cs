@@ -1,4 +1,4 @@
-using Autofac;
+﻿using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using MaterialMvvmSample.Utilities;
@@ -43,6 +43,7 @@ namespace MaterialMvvmSample.Core
             containerBuilder.RegisterType<MaterialCardView>().Named<Page>(ViewNames.MaterialCardView).As<MaterialCardView>().InstancePerDependency();
             containerBuilder.RegisterType<MaterialButtonView>().Named<Page>(ViewNames.MaterialButtonView).As<MaterialButtonView>().InstancePerDependency();
             containerBuilder.RegisterType<MaterialPicker>().Named<Page>(ViewNames.MaterialPicker).As<MaterialPicker>().InstancePerDependency();
+            containerBuilder.RegisterType<MaterialSwitch>().Named<Page>(ViewNames.MaterialSwitch).As<MaterialSwitch>().InstancePerDependency();
 
 
             containerBuilder.RegisterType<MainViewModel>().InstancePerDependency();
@@ -56,6 +57,7 @@ namespace MaterialMvvmSample.Core
             containerBuilder.RegisterType<MaterialCardViewModel>().InstancePerDependency();
             containerBuilder.RegisterType<MaterialButtonViewModel>().InstancePerDependency();
             containerBuilder.RegisterType<MaterialPickerViewModel>().InstancePerDependency();
+            containerBuilder.RegisterType<MaterialSwitchViewModel>().InstancePerDependency();
 
         }
     }

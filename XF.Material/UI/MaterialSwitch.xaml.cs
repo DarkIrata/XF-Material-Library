@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,14 +20,14 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty InactiveTrackColorProperty = BindableProperty.Create(nameof(InactiveTrackColor), typeof(Color), typeof(MaterialSwitch), Color.LightGray);
 
-        public static readonly BindableProperty InactiveThumColorProperty = BindableProperty.Create(nameof(InactiveThumbColor), typeof(Color), typeof(MaterialSwitch), Color.FromHex("#FFFFFF"));
+        public static readonly BindableProperty InactiveThumbColorProperty = BindableProperty.Create(nameof(InactiveThumbColor), typeof(Color), typeof(MaterialSwitch), Color.FromHex("#FFFFFF"));
 
         public static readonly BindableProperty IsActivatedProperty = BindableProperty.Create(nameof(IsActivated), typeof(bool), typeof(MaterialSwitch), false, BindingMode.TwoWay);
 
         public MaterialSwitch()
         {
             InitializeComponent();
-            _background.Color = IsActivated ? ActiveTrackColor : InactiveTrackColor;
+            this.UpdateTrackColor();
         }
 
         public event EventHandler<ActivatedEventArgs> Activated;
@@ -54,8 +52,8 @@ namespace XF.Material.Forms.UI
 
         public Color InactiveThumbColor
         {
-            get => (Color)GetValue(InactiveThumColorProperty);
-            set => SetValue(InactiveThumColorProperty, value);
+            get => (Color)GetValue(InactiveThumbColorProperty);
+            set => SetValue(InactiveThumbColorProperty, value);
         }
 
         public bool IsActivated
@@ -82,14 +80,22 @@ namespace XF.Material.Forms.UI
                     break;
                 case nameof(ActiveTrackColor):
                 case nameof(InactiveTrackColor):
-                    _background.Color = IsActivated ? ActiveTrackColor : InactiveTrackColor;
+                    this.UpdateTrackColor();
                     break;
+            }
+        }
+
+        private void UpdateTrackColor()
+        {
+            if (_background != null)
+            {
+                _background.Color = IsActivated ? ActiveTrackColor : InactiveTrackColor;
             }
         }
 
         private async Task AnimateSwitchAsync(bool isActivated)
         {
-            _background.Color = IsActivated ? ActiveTrackColor : InactiveTrackColor;
+            this.UpdateTrackColor();
 
             if (isActivated)
             {

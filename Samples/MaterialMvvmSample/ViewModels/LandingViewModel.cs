@@ -24,6 +24,8 @@ namespace MaterialMvvmSample.ViewModels
 
         public ICommand GoToMaterialPickerViewCommand => GoToCommand(ViewNames.MaterialPicker);
 
+        public ICommand GoToMaterialSwitchViewCommand => GoToCommand(ViewNames.MaterialSwitch);
+
         private ICommand GoToCommand(string name) => new Command(() => Navigation.PushAsync(name));
 
     }

@@ -29,4 +29,10 @@
      <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
   </ItemGroup>
   
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MaterialSwitch.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  
 </Project>

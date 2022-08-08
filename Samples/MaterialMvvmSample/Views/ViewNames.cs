@@ -26,6 +26,8 @@
 
         public const string MaterialPicker = nameof(Views.MaterialPicker);
 
+        public const string MaterialSwitch = nameof(Views.MaterialSwitch);
+
 
     }
 }
