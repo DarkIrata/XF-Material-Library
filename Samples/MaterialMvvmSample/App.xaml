@@ -62,6 +62,19 @@
                                          Secondary="#00377b"
                                          Surface="#FFFFFF" />
 
+        <Style TargetType="ui:MaterialTextField">
+            <!--<Setter Property="Background" Value="{AppThemeBinding Dark={StaticResource Themes.Surface_Dark}, Light={StaticResource Themes.Surface}}" />
+            <Setter Property="CardBackgroundColor" Value="{AppThemeBinding Dark={StaticResource Themes.Surface_Dark}, Light={StaticResource Themes.Surface}}" />
+            <Setter Property="ErrorColor" Value="{AppThemeBinding Dark={StaticResource Themes.Error_Dark}, Light={StaticResource Themes.Error}}" />
+            <Setter Property="LeadingIconTintColor" Value="{AppThemeBinding Dark={StaticResource Themes.Text_Dark}, Light={StaticResource Themes.Text}}" />
+            <Setter Property="UnderlineColor" Value="{AppThemeBinding Dark={StaticResource Themes.Text_Dark}, Light={StaticResource Themes.Text}}" />
+            <Setter Property="TintColor" Value="{AppThemeBinding Dark={StaticResource Themes.Secondary_Dark}, Light={StaticResource Themes.Secondary}}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Themes.Text_Dark}, Light={StaticResource Themes.Text}}" />
+            <Setter Property="FloatingPlaceholderColor" Value="{AppThemeBinding Dark={StaticResource Themes.Text_Dark}, Light={StaticResource Themes.Text}}" />
+            <Setter Property="HelperTextColor" Value="{AppThemeBinding Dark={StaticResource Themes.Text_Dark}, Light={StaticResource Themes.Text}}" />-->
+            <Setter Property="PlaceholderColor" Value="Blue" />
+        </Style>
+
         <!-- Does not support DynamicResource (why?) -->
         <mtrl:MaterialConfiguration x:Key="Material.Style"
                                     ColorConfiguration="{StaticResource Material.Color}"
@@ -70,6 +83,19 @@
         <Style x:Key="GreenField" TargetType="ui:MaterialTextField">
             <Setter Property="ReturnType" Value="Next" />
             <Setter Property="BackgroundColor" Value="#e0f0e0" />
+        </Style>
+
+        <Style TargetType="ui:MaterialSwitch">
+            <Setter Property="ActiveTrackColor" Value="Red" />
+            <Setter Property="ActiveThumbColor" Value="Green" />
+            <Setter Property="InactiveTrackColor" Value="Yellow" />
+            <Setter Property="InactiveThumbColor" Value="Blue" />
+            <!--<Setter Property="ActiveThumbColor" Value="{AppThemeBinding Dark={StaticResource Themes.OnSurface_Dark}, Light={StaticResource Themes.OnSurface}}" />-->
+            <!--<Setter Property="InactiveTrackColor" Value="{extensions:ColorVariationAdjuster Color={StaticResource Themes.OnSurface}, AdjustBy=0.1}" />
+            <Setter Property="ActiveThumbColor" Value="{extensions:ColorVariationAdjuster Color={StaticResource Themes.Secondary}, AdjustBy=0.75}" />-->
+            <!--<Setter Property="ActiveTrackColor" Value="{extensions:ColorVariationAdjuster Color={AppThemeBinding Dark={StaticResource Themes.OnSurface_Dark}, Light={StaticResource Themes.OnSurface}}, AdjustBy=0.3}" />
+            <Setter Property="InactiveTrackColor" Value="{extensions:ColorVariationAdjuster Color={AppThemeBinding Dark={StaticResource Themes.OnSurface_Dark}, Light={StaticResource Themes.OnSurface}}, AdjustBy=0.1}" />
+            <Setter Property="ActiveThumbColor" Value="{extensions:ColorVariationAdjuster Color={AppThemeBinding Dark={StaticResource Themes.Secondary_Dark}, Light={StaticResource Themes.Secondary}}, AdjustBy=0.75}" />-->
         </Style>
 
     </Application.Resources>
