@@ -24,6 +24,8 @@
             Padding="0"
             CornerRadius="10"
             Elevation="1"
+            BackgroundColor="{Binding BackgroundColor}"
+            Background="{Binding Background}"
             HeightRequest="20"
             HorizontalOptions="Start"
             VerticalOptions="Center"

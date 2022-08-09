@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.Resources;
@@ -39,6 +38,7 @@ namespace XF.Material.Forms.UI
         public MaterialCard()
         {
             SetDynamicResource(BackgroundColorProperty, MaterialConstants.Color.SURFACE);
+            SetDynamicResource(BackgroundProperty, MaterialConstants.Color.SURFACE);
             DisableHasShadow();
         }
 
