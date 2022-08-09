@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MaterialMvvmSample.Views.MaterialSwitch"
-             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material">
+<ContentPage
+    x:Class="MaterialMvvmSample.Views.MaterialSwitch"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material">
     <ContentPage.Content>
         <StackLayout>
-            <Switch  IsToggled="True" HorizontalOptions="Center" />
-            <material:MaterialSwitch IsActivated="True"/>
+            <Switch HorizontalOptions="Center" IsToggled="True" />
+            <material:MaterialSwitch IsActivated="True" />
+            <material:MaterialSwitch IsActivated="{Binding IsActive}" />
+            <Button Text="Switch" Command="{Binding SwitchIsActiveCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
