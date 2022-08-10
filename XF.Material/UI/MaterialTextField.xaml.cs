@@ -24,6 +24,8 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty CardBackgroundColorProperty = BindableProperty.Create(nameof(CardBackgroundColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#DCDCDC"));
 
+        public static readonly BindableProperty CardBackgroundVisibleProperty = BindableProperty.Create(nameof(CardBackgroundVisible), typeof(bool), typeof(MaterialTextField), true);
+
         public static readonly BindableProperty ChoiceSelectedCommandProperty = BindableProperty.Create(nameof(ChoiceSelectedCommand), typeof(ICommand), typeof(MaterialTextField));
 
         public static readonly BindableProperty ChoicesProperty = BindableProperty.Create(nameof(Choices), typeof(IList), typeof(MaterialTextField));
@@ -199,6 +201,12 @@ namespace XF.Material.Forms.UI
         {
             get => (Color)GetValue(CardBackgroundColorProperty);
             set => SetValue(CardBackgroundColorProperty, value);
+        }
+
+        public bool CardBackgroundVisible
+        {
+            get => (bool)GetValue(CardBackgroundVisibleProperty);
+            set => SetValue(CardBackgroundVisibleProperty, value);
         }
 
         /// <summary>
