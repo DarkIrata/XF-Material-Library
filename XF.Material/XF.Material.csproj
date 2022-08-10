@@ -17,8 +17,8 @@
     <PackageId>XF.Material</PackageId>
     <Description>A Xamarin.Forms library for Xamarin.Android and Xamarin.iOS to implement Google's Material Design.</Description>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <Version>1.8.3.2</Version>
-    <AssemblyVersion>1.8.3.2</AssemblyVersion>
+    <Version>1.8.3.4</Version>
+    <AssemblyVersion>1.8.3.4</AssemblyVersion>
     <FileVersion>1.8.3-ip</FileVersion>
     <RepositoryUrl>https://github.com/DarkIrata/XF-Material-Library</RepositoryUrl>
     <PackageProjectUrl>https://github.com/DarkIrata/XF-Material-Library</PackageProjectUrl>

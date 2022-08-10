@@ -137,6 +137,8 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty TintColorProperty = BindableProperty.Create(nameof(TintColor), typeof(Color), typeof(MaterialTextField), Material.Color.Secondary);
 
+        public static readonly BindableProperty CursorColorProperty = BindableProperty.Create(nameof(CursorColor), typeof(Color), typeof(MaterialTextField), Material.Color.Secondary);
+
         public static readonly BindableProperty UnderlineColorProperty = BindableProperty.Create(nameof(UnderlineColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#99000000"));
 
         public static readonly BindableProperty PlaceholderLineBreakModeProperty = BindableProperty.Create(nameof(PlaceholderLineBreakMode), typeof(LineBreakMode), typeof(MaterialTextField), LineBreakMode.WordWrap);
@@ -584,6 +586,16 @@ namespace XF.Material.Forms.UI
         {
             get => (Color)GetValue(TintColorProperty);
             set => SetValue(TintColorProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the tint color of the curor (carrot) of this text field when focused.
+        /// The default value is the color of <see cref="MaterialColorConfiguration.Secondary"/>.
+        /// </summary>
+        public Color CursorColor
+        {
+            get => (Color)GetValue(CursorColorProperty);
+            set => SetValue(CursorColorProperty, value);
         }
 
         /// <summary>
@@ -1444,6 +1456,11 @@ namespace XF.Material.Forms.UI
             entry.TintColor = tintColor;
         }
 
+        private void OnCursorColorChanged(Color cursorColor)
+        {
+            entry.CursorColor = cursorColor;
+        }
+
         private void OnUnderlineColorChanged(Color underlineColor)
         {
             if (AlwaysShowUnderline)
@@ -1475,6 +1492,7 @@ namespace XF.Material.Forms.UI
                 { nameof(TextColor), () => OnTextColorChanged(TextColor) },
                 { nameof(TextFontFamily), () => OnTextFontFamilyChanged(TextFontFamily) },
                 { nameof(TintColor), () => OnTintColorChanged(TintColor) },
+                { nameof(CursorColor), () => OnCursorColorChanged(CursorColor) },
                 { nameof(Placeholder), () => OnPlaceholderChanged(Placeholder) },
                 { nameof(PlaceholderColor), () => OnPlaceholderColorChanged(PlaceholderColor) },
                 { nameof(PlaceholderFontFamily), () => OnPlaceholderFontFamilyChanged(PlaceholderFontFamily) },

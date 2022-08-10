@@ -10,6 +10,8 @@ namespace XF.Material.Forms.UI.Internals
     {
         public static readonly BindableProperty TintColorProperty = BindableProperty.Create(nameof(TintColor), typeof(Color), typeof(MaterialEntry), Material.Color.Secondary);
 
+        public static readonly BindableProperty CursorColorProperty = BindableProperty.Create(nameof(CursorColor), typeof(Color), typeof(MaterialEntry), Material.Color.Secondary);
+
         public static readonly BindableProperty IsNumericKeyboardProperty = BindableProperty.Create(nameof(IsNumericKeyboard), typeof(bool), typeof(MaterialEntry), false);
 
         /// <summary>
@@ -29,6 +31,12 @@ namespace XF.Material.Forms.UI.Internals
         {
             get => (Color)GetValue(TintColorProperty);
             set => SetValue(TintColorProperty, value);
+        }
+
+        public Color CursorColor
+        {
+            get => (Color)GetValue(CursorColorProperty);
+            set => SetValue(CursorColorProperty, value);
         }
     }
 }

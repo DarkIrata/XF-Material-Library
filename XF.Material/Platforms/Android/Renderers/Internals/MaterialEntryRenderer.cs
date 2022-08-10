@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Views.InputMethods;
@@ -37,7 +38,7 @@ namespace XF.Material.Droid.Renderers.Internals
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e?.PropertyName == nameof(MaterialEntry.TintColor))
+            if (e?.PropertyName == nameof(MaterialEntry.CursorColor))
             {
                 ChangeCursorColor();
             }
@@ -69,6 +70,14 @@ namespace XF.Material.Droid.Renderers.Internals
                 return;
             }
 
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
+            {
+                var cursorDrawable = ContextCompat.GetDrawable(Context, Resource.Drawable.abc_text_cursor_material);
+                cursorDrawable.SetColorFilter(((MaterialEntry)Element).CursorColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcIn);
+                Control.TextCursorDrawable = cursorDrawable;
+                return;
+            }
+
             try
             {
                 var field = Java.Lang.Class.FromType(typeof(Android.Widget.TextView)).GetDeclaredField("mCursorDrawableRes");
@@ -79,7 +88,7 @@ namespace XF.Material.Droid.Renderers.Internals
                 field.Accessible = true;
 
                 var cursorDrawable = ContextCompat.GetDrawable(Context, resId);
-                cursorDrawable.SetColorFilter(((MaterialEntry)Element).TintColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcIn);
+                cursorDrawable.SetColorFilter(((MaterialEntry)Element).CursorColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcIn);
 
                 var editor = field.Get(Control);
                 field = editor.Class.GetDeclaredField("mCursorDrawable");
