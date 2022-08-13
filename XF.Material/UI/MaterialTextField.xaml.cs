@@ -154,6 +154,9 @@ namespace XF.Material.Forms.UI
         private DisplayInfo _lastDeviceDisplay;
         private int _selectedIndex = -1;
 
+        private ImageSource prevTrailingIconSource = null;
+        private bool prevTrailingIconIsVisible = false;
+
         /// <summary>
         /// Initializes a new instance of <see cref="MaterialTextField"/>.
         /// </summary>
@@ -884,6 +887,13 @@ namespace XF.Material.Forms.UI
             counter.TextColor = ErrorColor;
             underline.Color = ShouldAnimateUnderline ? ErrorColor : Color.Transparent;
             persistentUnderline.Color = AlwaysShowUnderline ? ErrorColor : Color.Transparent;
+
+            if (!(trailingIcon.Source is FileImageSource fis && fis.File == ErrorIcon))
+            {
+                prevTrailingIconIsVisible = trailingIcon.IsVisible;
+                prevTrailingIconSource = trailingIcon.Source;
+            }
+
             trailingIcon.IsVisible = true;
             trailingIcon.Source = ErrorIcon;
             trailingIcon.TintColor = ErrorColor;
@@ -949,10 +959,19 @@ namespace XF.Material.Forms.UI
                 trailingIcon.Source = "xf_arrow_dropdown";
                 trailingIcon.TintColor = TextColor;
             }
-            if (InputType == MaterialTextFieldInputType.CommandChoice)
+            else if (InputType == MaterialTextFieldInputType.CommandChoice)
             {
                 trailingIcon.Source = "xf_arrow_right";
                 trailingIcon.TintColor = TextColor;
+            }
+            else
+            {
+                if (!HasError)
+                {
+                    trailingIcon.IsVisible = prevTrailingIconIsVisible;
+                    trailingIcon.Source = prevTrailingIconSource;
+                    trailingIcon.TintColor = this.TrailingIconTintColor;
+                }
             }
         }
 
