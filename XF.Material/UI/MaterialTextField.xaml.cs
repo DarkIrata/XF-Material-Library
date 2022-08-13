@@ -155,7 +155,7 @@ namespace XF.Material.Forms.UI
         private int _selectedIndex = -1;
 
         private ImageSource prevTrailingIconSource = null;
-        private bool prevTrailingIconIsVisible = false;
+        private bool prevTrailingIconIsVisible = true;
 
         /// <summary>
         /// Initializes a new instance of <see cref="MaterialTextField"/>.
@@ -1337,6 +1337,7 @@ namespace XF.Material.Forms.UI
         private void OnTrailingIconChanged(ImageSource imageSource)
         {
             trailingIcon.Source = imageSource;
+            prevTrailingIconSource = imageSource;
             OnTrailingIconTintColorChanged(TrailingIconTintColor);
         }
 
